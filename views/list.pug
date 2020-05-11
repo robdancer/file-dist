@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1= title
+    ul
+        each title in titles
+            - var path = '/files/' + title
+            li
+                a(href=path) #{title}
+
+block footer
+    a(href='#' onclick='signout()') Sign out
+    script.
+        function signout() {
+            document.cookie = "loggedin= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+            window.location.href = '/';
+        }
