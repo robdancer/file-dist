@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET login page. */
 router.get('/', function(req, res, next) {
     if(req.signedCookies.loggedin === 'true') {
-        res.send('<script>window.location.href=\'/list\'</script>');
+        res.send('<script>window.location.href=\'/list/\'</script>');
     } else {
         res.render('login', { title: 'Login', fail: false });
     }    
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     if(verify.verifyCredentials(req.body.password)) {
         res.cookie('loggedin', true, {signed: true, sameSite: 'Strict'});
-        res.send('<script>window.location.href=\'/list\'</script>');
+        res.send('<script>window.location.href=\'/list/\'</script>');
     } else {
         res.render('login', {title: 'Login', fail: true})
     }

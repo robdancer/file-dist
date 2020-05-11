@@ -4,9 +4,12 @@ block content
     h1= title
     ul
         each title in titles
-            - var path = '/files/' + title
             li
-                a(href=path) #{title}
+                -if (title.isDirectory())
+                    a(href=(title.name+'/')) #{title.name}
+                -else
+                    a(href=title.name) #{title.name}
+
 
 block footer
     a(href='#' onclick='signout()') Sign out
