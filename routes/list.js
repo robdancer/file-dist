@@ -38,7 +38,7 @@ router.get('/list/*', function(req, res, next) {
             }
         });      
     } else {
-        res.send('<script>window.location.href=\'/login\'</script>');
+        res.redirect('/login');
     }    
 });
 
