@@ -3,12 +3,6 @@ var fs = require('fs');
 var path = require('path');
 var router = express.Router();
 
-var titles;
-
-fs.readdir('././resource', function(err, files) {
-    titles = files;
-});
-
 /* GET login page. */
 router.get('/list/*', function(req, res, next) {
     if(req.signedCookies.loggedin === 'true') {
@@ -38,7 +32,7 @@ router.get('/list/*', function(req, res, next) {
             }
         });      
     } else {
-        res.redirect('/login');
+        res.redirect('/login?after=' + encodeURIComponent(req.path));
     }    
 });
 

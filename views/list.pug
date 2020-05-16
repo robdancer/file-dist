@@ -7,11 +7,13 @@ block content
         each title in titles
             tr
                 -if (title.isDirectory())
-                    td.icon 🗀
+                    td.icon
+                        img(src='/images/folder-black-18dp.svg')
                     td.folder 
                         a(href=(title.name+'/')) #{title.name}
                 -else
-                    td.icon 🗎
+                    td.icon 
+                        img(src='/images/description-black-18dp.svg')
                     td.file
                         a(href=title.name) #{title.name}
 

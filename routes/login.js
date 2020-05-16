@@ -15,7 +15,11 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     if(verify.verifyCredentials(req.body.password)) {
         res.cookie('loggedin', true, {signed: true, sameSite: 'Strict'});
-        res.redirect('/list/');
+        if(req.query.after) {
+            res.redirect(decodeURIComponent(req.query.after));
+        } else {
+            res.redirect('/list/');
+        }
     } else {
         res.render('login', {title: 'Login', fail: true})
     }
