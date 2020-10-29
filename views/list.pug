@@ -3,9 +3,18 @@ extends layout
 block content
     h1= title
     a(href='../').backbtn Back
-    table
+    br
+    script.
+        $(document).ready(() => {
+            $('#filter').on('input', () => {
+                $(".entry").hide();
+                $(".entry").filter((index, item) => item.textContent.toLowerCase().trim().includes($('#filter').val().toLowerCase())).show();
+            });
+        });
+    input(type='text' id='filter' name='filter' placeholder='Filter results')
+    table#items
         each title in titles
-            tr
+            tr.entry
                 -if (title.isDirectory())
                     td.icon
                         img(src='/images/folder-black-18dp.svg')
