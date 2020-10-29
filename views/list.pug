@@ -5,14 +5,23 @@ block content
     a(href='../').backbtn Back
     br
     script.
+        function filterTable() {
+            $(".entry").hide();
+            var visible = $(".entry").filter((index, item) => item.textContent.toLowerCase().trim().includes($('#filter').val().toLowerCase()));
+            if (visible.length == 0) {
+                $('#noresults').text('No results');
+            } else {
+                $('#noresults').text('');
+                visible.show();
+            }
+        }
         $(document).ready(() => {
-            $(".entry").filter((index, item) => item.textContent.toLowerCase().trim().includes($('#filter').val().toLowerCase())).show();
-            $('#filter').on('input', () => {
-                $(".entry").hide();
-                $(".entry").filter((index, item) => item.textContent.toLowerCase().trim().includes($('#filter').val().toLowerCase())).show();
-            });
+            $("#filter").val('');
+            filterTable();
+            $('#filter').on('input', filterTable);
         });
     input(type='text' id='filter' name='filter' placeholder='Filter results')
+    p#noresults
     table#items
         each title in titles
             tr.entry
