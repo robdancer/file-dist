@@ -6,6 +6,7 @@ block content
     br
     script.
         $(document).ready(() => {
+            $(".entry").filter((index, item) => item.textContent.toLowerCase().trim().includes($('#filter').val().toLowerCase())).show();
             $('#filter').on('input', () => {
                 $(".entry").hide();
                 $(".entry").filter((index, item) => item.textContent.toLowerCase().trim().includes($('#filter').val().toLowerCase())).show();
